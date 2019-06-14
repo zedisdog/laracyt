@@ -8,9 +8,9 @@ namespace Dezsidog\LaraCyt;
 
 use Dezsidog\CytSdk\Sdk;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class LaraCytServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
