@@ -14,13 +14,14 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
-        $this->app->bind(Sdk::class, function (Application $app) {
+        $this->app->bind(Sdk::class, function (Application $app, array $config = []) {
+            $config = array_merge(config('laracyt'), $config);
             return new Sdk(
-                strval(config('laracyt.create_user')),
-                strval(config('laracyt.key')),
-                strval(config('laracyt.supplier_identity')),
+                strval($config['create_user']),
+                strval($config['key']),
+                strval($config['supplier_identity']),
                 $app->make('log'),
-                strval(config('laracyt.service_url'))
+                strval($config['service_url'])
             );
         });
     }
