@@ -40,8 +40,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config.php', 'laracyt');
 
         $router = $this->app->make('router');
-        $router->prefix(config('laracyt.hook.prefix', 'api'))
-            ->middleware(config('laracyt.hook.middlewares'), 'api')
+        $router->prefix(config('laracyt.hook.prefix'))
+            ->middleware(config('laracyt.hook.middlewares'))
             ->any(config('laracyt.hook.url'), config('laracyt.hook.action'));
     }
 }
