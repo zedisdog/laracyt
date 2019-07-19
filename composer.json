@@ -17,5 +17,12 @@
         "psr-4": {
             "Dezsidog\\LaraCyt\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dezsidog\\LaraCyt\\ServiceProvider"
+            ]
+        }
     }
 }

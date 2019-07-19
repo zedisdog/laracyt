@@ -8,19 +8,20 @@ namespace Dezsidog\LaraCyt;
 
 use Dezsidog\CytSdk\Sdk;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class LaraCytServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
-        $this->app->bind(Sdk::class, function (Application $app) {
+        $this->app->bind(Sdk::class, function (Application $app, array $config = []) {
+            $config = array_merge(config('laracyt'), $config);
             return new Sdk(
-                strval(config('laracyt.create_user')),
-                strval(config('laracyt.key')),
-                strval(config('laracyt.supplier_identity')),
+                strval($config['create_user']),
+                strval($config['key']),
+                strval($config['supplier_identity']),
                 $app->make('log'),
-                strval(config('laracyt.service_url'))
+                strval($config['service_url'])
             );
         });
     }
@@ -39,8 +40,8 @@ class LaraCytServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config.php', 'laracyt');
 
         $router = $this->app->make('router');
-        $router->prefix(config('laracyt.hook.prefix', 'api'))
-            ->middleware(config('laracyt.hook.middlewares'), 'api')
+        $router->prefix(config('laracyt.hook.prefix'))
+            ->middleware(config('laracyt.hook.middlewares'))
             ->any(config('laracyt.hook.url'), config('laracyt.hook.action'));
     }
 }
