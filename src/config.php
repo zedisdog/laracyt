@@ -7,7 +7,7 @@ return [
     'service_url' => env('SERVICE_URL', 'http://www.jingqu.cn/service/distributor.do'),
     'hook' => [
         'prefix' => env('CYT_HOOK_PREFIX', 'api'),
-        'middleware' => env('CYT_HOOK_MIDDLEWARE', 'api'),
+        'middlewares' => env('CYT_HOOK_MIDDLEWARE', 'api'),
         'url' => env('CYT_HOOK_URL', 'cyt-hook'),
         'action' => env('CYT_HOOK_ACTION', '\Dezsidog\LaraCyt\Http\HookController')
     ]
